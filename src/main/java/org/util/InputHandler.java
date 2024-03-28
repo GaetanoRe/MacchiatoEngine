@@ -53,7 +53,24 @@ public class InputHandler {
         return -1;
     }
 
+    public void setKey(String command, int newKey) {
+        int size = commands.size();
+        int commandIndex = -1;
+        Command newCommand = null;
 
+        // checks through the LinkedList to find the command to be changed
+        for ( int i = 0; i < size; ++i ) {
+            if ( commands.get(i).getCommand().equalsIgnoreCase(command) ) {
+                commandIndex = i;
+                newCommand = new Command(command, newKey);
+                commands.set(i, newCommand);
+            }
+        }
+
+        if ( newCommand == null ) {
+            System.out.println("The command: '" + command + "' was not found, the new key was not set");
+        }
+    }
 
 }
 

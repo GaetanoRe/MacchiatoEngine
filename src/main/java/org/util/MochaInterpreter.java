@@ -12,7 +12,7 @@ public class MochaInterpreter {
     private File file;
     public MochaInterpreter(String filename){
         this.filepath += filename + ".mocha";
-        this.file = new File(this.filename);
+        this.file = new File(this.filepath);
         this.filename = file.getName();
     }
 

@@ -102,4 +102,8 @@ public class Window {
         glfwTerminate();
     }
 
+    public void stopLoop(){
+        glfwTerminate();
+    }
+
 }

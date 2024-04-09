@@ -1,5 +1,7 @@
 package org.util;
 
+import org.util.debug.MochaNotif;
+
 import java.io.*;
 import java.util.Scanner;
 
@@ -30,7 +32,7 @@ public class MochaInterpreter {
             // Now, read the mocha file and if the splitname[0] says input, use the InputHandler class and add them to
             // InputHandler LinkedList (might change it to a heap but it is a linked list for now)
             if ( splitName[0].equals("input") )
-                setInputSettings(this.file);
+                setInputSettings(this.file); // edit input settings now
         }
         else {
             throw new IOException("This is not a mocha file");
@@ -38,6 +40,8 @@ public class MochaInterpreter {
     }
 
     public void setInputSettings(File input) throws FileNotFoundException {
+        MochaNotif errNotif = new MochaNotif();
+        String[] splitUp;
         scnr = new Scanner(input);
         String line = scnr.nextLine();
 
@@ -45,6 +49,17 @@ public class MochaInterpreter {
             // skip and go to the next line if this line starts with # (comment)
             if ( line.charAt(0) == '#' ) {
                 scnr.nextLine();
+            }
+            else {
+                splitUp = line.split(" ");
+
+                // if the line is not in the correct format, inform the user and don't set the command key - continue loop
+                if ( splitUp.length != 2 ) {
+                    String message = "An invalid input format was detected: " + line +
+                            "\nThe accepted input format is: '(command) (key)', .";
+                    String title = "Invalid Format";
+                    errNotif.show(message, title);
+                }
             }
 
         }

@@ -1,4 +1,6 @@
 package org.util;
+import org.util.debug.MochaNotif;
+
 import static org.lwjgl.glfw.GLFW.*;
 import java.util.*;
 public class InputHandler {
@@ -58,17 +60,23 @@ public class InputHandler {
         int commandIndex = -1;
         Command newCommand = null;
 
+        /* TODO: check if newKey is in the GLFW values - output MochaNotif error if not found */
+
         // checks through the LinkedList to find the command to be changed
         for ( int i = 0; i < size; ++i ) {
             if ( commands.get(i).getCommand().equalsIgnoreCase(command) ) {
                 commandIndex = i;
                 newCommand = new Command(command, newKey);
-                commands.set(i, newCommand);
+                commands.set(commandIndex, newCommand);
             }
         }
 
-        if ( newCommand == null ) {
-            System.out.println("The command: '" + command + "' was not found, the new key was not set");
+        // if the requested command was not found - the new key isn't set and a MochaNotif pops up
+        if ( commandIndex == -1 ) {
+            MochaNotif errNotif = new MochaNotif();
+            String message = "The command: '" + command + "' was not found, the new key was not set.";
+            String title = "Command Not Found";
+            errNotif.show(message, title);
         }
     }
 

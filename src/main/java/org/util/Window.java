@@ -48,6 +48,9 @@ public class Window {
         }
 
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+        glfwMakeContextCurrent(window);
+
+        GL.createCapabilities();
 
         GLFWVidMode vidMode = glfwGetVideoMode(window);
 
@@ -67,12 +70,32 @@ public class Window {
      * runLoop method - displays the window created, handles the input and manages the renderers utilized in
      * the engine.
      */
-    public void runLoop(){
-        glfwMakeContextCurrent(window);
+    public String runLoop(){
         glfwShowWindow(window);
-        InputHandler inputHandler = new InputHandler(window);
-        Renderer renderer = new Renderer();
-        Texture texture = new Texture("GabeTheGhost.png");
+        int glError = 0;
+        MochaInputHandler inputHandler = new MochaInputHandler(window);
+        float [] verticies = new float[] {
+                -0.25f, 0.25f, 0, // TOP LEFT
+                0.25f, 0.25f, 0, // TOP RIGHT
+                0.25f, -0.25f, 0, // BOTTOM RIGHT
+
+                0.25f, -0.25f, 0, // BOTTOM RIGHT
+                -0.25f, -0.25f, 0, // BOTTOM LEFT
+                -0.25f, 0.25f, 0 // TOP LEFT
+        };
+        float [] textureCoords = new float []{
+                0, 0,  // top left
+                1, 0,  // top right
+                1, 1,  // bottom right
+
+                1, 1,  // bottom right
+                0, 1,  // bottom left
+                0, 0   // top left
+
+        };
+        MochaTextureHandler textModel = new MochaTextureHandler(verticies, textureCoords);
+        Texture texture = new Texture("src/main/resources/textures/GabeTheGhost.png");
+        String glErrorMessage = "";
         float x = 0;
         float y = 0;
         while(running){
@@ -81,25 +104,33 @@ public class Window {
                 running = false;
             }
             // Input Handling here
-            if(inputHandler.isButtonPressed(GLFW_KEY_UP)){
-                y += 0.01f;
+
+            // Below is code that was used to move the quad with the previous rendering method.
+            /*if(inputHandler.isButtonPressed(GLFW_KEY_UP)){
+                y += 0.00.25f;
             }
             if(inputHandler.isButtonPressed(GLFW_KEY_LEFT)){
-                x -= 0.01f;
+                x -= 0.00.25f;
             }
             if(inputHandler.isButtonPressed(GLFW_KEY_RIGHT)){
-                x += 0.01f;
+                x += 0.00.25f;
             }
             if(inputHandler.isButtonPressed(GLFW_KEY_DOWN)){
-                y -= 0.01f;
-            }
+                y -= 0.00.25f;
+            }*/
             // Rendering Handling here
-            renderer.renderText(texture, x, y, 0.25f, 0.25f);
+            texture.bind();
+            textModel.render();
+            glError = glGetError();
+            if(glError != GL_NO_ERROR){
+                glErrorMessage += "OpenGL Error: " + glError + "\n";
+            }
             glfwSwapBuffers(window);
 
         }
 
         glfwTerminate();
+        return glErrorMessage;
     }
 
     public void stopLoop(){

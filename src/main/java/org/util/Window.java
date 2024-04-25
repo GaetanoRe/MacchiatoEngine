@@ -78,22 +78,21 @@ public class Window {
                 -0.25f, 0.25f, 0, // TOP LEFT
                 0.25f, 0.25f, 0, // TOP RIGHT
                 0.25f, -0.25f, 0, // BOTTOM RIGHT
-
-                0.25f, -0.25f, 0, // BOTTOM RIGHT
                 -0.25f, -0.25f, 0, // BOTTOM LEFT
-                -0.25f, 0.25f, 0 // TOP LEFT
         };
         float [] textureCoords = new float []{
                 0, 0,  // top left
                 1, 0,  // top right
                 1, 1,  // bottom right
-
-                1, 1,  // bottom right
                 0, 1,  // bottom left
-                0, 0   // top left
 
         };
-        MochaTextureHandler textModel = new MochaTextureHandler(verticies, textureCoords);
+
+        int [] indicies = new int []{
+                0,1,2,
+                2,3,0
+        };
+        MochaTextureHandler textModel = new MochaTextureHandler(verticies, textureCoords, indicies);
         Texture texture = new Texture("src/main/resources/textures/GabeTheGhost.png");
         String glErrorMessage = "";
         float x = 0;

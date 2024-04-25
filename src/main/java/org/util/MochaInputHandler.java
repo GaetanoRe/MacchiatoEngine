@@ -3,7 +3,7 @@ import org.util.debug.MochaNotif;
 
 import static org.lwjgl.glfw.GLFW.*;
 import java.util.*;
-public class InputHandler {
+public class MochaInputHandler {
     private class Command{
         private String command;
         private int key;
@@ -28,7 +28,7 @@ public class InputHandler {
     private long window;
     private LinkedList<Command> commands;
 
-    public InputHandler(long window){
+    public MochaInputHandler(long window){
         this.window = window;
         commands = new LinkedList<Command>();
     }

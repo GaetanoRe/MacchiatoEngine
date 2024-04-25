@@ -13,7 +13,7 @@ public class MochaInterpreter {
     private String filepath = "org/sys/settings/";
     private String filename;
     private File file;
-    private InputHandler inputHelper;
+    private MochaInputHandler inputHelper;
     private Scanner scnr;
     public MochaInterpreter(String filename) {
         this.filepath += filename + ".mocha";

@@ -8,15 +8,13 @@ import java.nio.*;
 import javax.imageio.*;
 
 public class Texture {
-    private String filename = "src/main/resources/textures/";
     private int id;
     private int width;
     private int height;
     public Texture(String filename){
-        this.filename += filename;
         BufferedImage bi;
         try{
-            bi = ImageIO.read(new File(this.filename));
+            bi = ImageIO.read(new File(filename));
             this.width = bi.getWidth();
             this.height = bi.getHeight();
 
@@ -24,14 +22,12 @@ public class Texture {
             pixelsRaw = bi.getRGB(0,0, width, height, null, 0, width);
 
             ByteBuffer pixels = BufferUtils.createByteBuffer(width * height * 4);
-            for(int i = 0; i < width; i++){
-                for(int j = 0; j < height; j++){
-                    int pixel = pixelsRaw[i * width + j];
-                    pixels.put((byte) ((pixel >> 16) & 0xFF)); // RED
-                    pixels.put((byte) ((pixel >> 8) & 0xFF)); // GREEN
-                    pixels.put((byte) (pixel & 0xFF)); // BLUE
-                    pixels.put((byte) ((pixel >> 24) & 0xFF)); // ALPHA
-                }
+            for(int i = 0; i < width * height; i++){
+                int pixel = pixelsRaw[i];
+                pixels.put((byte) ((pixel >> 16) & 0xFF)); // RED
+                pixels.put((byte) ((pixel >> 8) & 0xFF)); // GREEN
+                pixels.put((byte) (pixel & 0xFF)); // BLUE
+                pixels.put((byte) ((pixel >> 24) & 0xFF)); // ALPHA
             }
             pixels.flip();
 

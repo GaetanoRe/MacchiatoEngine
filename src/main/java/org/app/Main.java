@@ -11,6 +11,7 @@ public class Main {
         MochaLogs mLogs = new MochaLogs();
         Window win = new Window("MochaEngine", 1280, 720);
         String glErr = win.runLoop();
+        
         mLogs.log(glErr);
     }
 }

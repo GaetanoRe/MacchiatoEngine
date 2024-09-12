@@ -75,10 +75,10 @@ public class Window {
         int glError = 0;
         MochaInputHandler inputHandler = new MochaInputHandler(window);
         float [] verticies = new float[] {
-                -0.25f, 0.25f, 0, // TOP LEFT
-                0.25f, 0.25f, 0, // TOP RIGHT
-                0.25f, -0.25f, 0, // BOTTOM RIGHT
-                -0.25f, -0.25f, 0, // BOTTOM LEFT
+                -0.05f, 0.05f, 0, // TOP LEFT
+                0.05f, 0.05f, 0, // TOP RIGHT
+                0.05f, -0.05f, 0, // BOTTOM RIGHT
+                -0.05f, -0.05f, 0, // BOTTOM LEFT
         };
         float [] textureCoords = new float []{
                 0, 0,  // top left

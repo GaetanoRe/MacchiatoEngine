@@ -93,10 +93,17 @@ public class Window {
                 2,3,0
         };
         MochaTextureHandler textModel = new MochaTextureHandler(verticies, textureCoords, indicies);
-        Texture texture = new Texture("src/main/resources/textures/GabeTheGhost.png");
+        Texture texture = new Texture("src/main/resources/textures/GabeTheGhost.png", 0);
+        Texture texture2 = new Texture("src/main/resources/textures/Smiley.png", 0);
+
+        MochaRenderer mr = new MochaRenderer(texture,new float[] {2, 2}, new float [] {0f, 0f}, textModel);
+        MochaRenderer mr2 = new MochaRenderer(texture2,new float[] {2, 2}, new float [] {0, 0f}, textModel);
         String glErrorMessage = "";
-        float x = 0;
-        float y = 0;
+        float x = mr.getPosition()[0];
+        float y = mr.getPosition()[1];
+
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         while(running){
             glfwPollEvents();
             if(glfwWindowShouldClose(window)){
@@ -105,21 +112,27 @@ public class Window {
             // Input Handling here
 
             // Below is code that was used to move the quad with the previous rendering method.
-            /*if(inputHandler.isButtonPressed(GLFW_KEY_UP)){
-                y += 0.00.25f;
+            if(inputHandler.isButtonPressed(GLFW_KEY_UP)){
+                y += 1f;
             }
             if(inputHandler.isButtonPressed(GLFW_KEY_LEFT)){
-                x -= 0.00.25f;
+                x -= 1f;
             }
             if(inputHandler.isButtonPressed(GLFW_KEY_RIGHT)){
-                x += 0.00.25f;
+                x += 1f;
             }
             if(inputHandler.isButtonPressed(GLFW_KEY_DOWN)){
-                y -= 0.00.25f;
-            }*/
+                y -= 1f;
+            }
+
+            mr.setPosition(new float[] {x, y});
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
             // Rendering Handling here
-            texture.bind();
-            textModel.render();
+            mr.renderText();
+
+            mr2.renderText();
+
             glError = glGetError();
             if(glError != GL_NO_ERROR){
                 glErrorMessage += "OpenGL Error: " + glError + "\n";
@@ -127,12 +140,13 @@ public class Window {
             glfwSwapBuffers(window);
 
         }
-
+        glDisable(GL_BLEND);
         glfwTerminate();
         return glErrorMessage;
     }
 
     public void stopLoop(){
+        glDisable(GL_BLEND);
         glfwTerminate();
     }
 

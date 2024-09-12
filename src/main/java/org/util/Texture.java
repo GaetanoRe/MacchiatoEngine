@@ -11,12 +11,15 @@ public class Texture {
     private int id;
     private int width;
     private int height;
-    public Texture(String filename){
+    private int zIndex;
+
+    public Texture(String filename, int zIndex){
         BufferedImage bi;
         try{
             bi = ImageIO.read(new File(filename));
             this.width = bi.getWidth();
             this.height = bi.getHeight();
+            this.zIndex = zIndex;
 
             int [] pixelsRaw = new int [width * height * 4];
             pixelsRaw = bi.getRGB(0,0, width, height, null, 0, width);
@@ -50,4 +53,6 @@ public class Texture {
     public void bind(){
         glBindTexture(GL_TEXTURE_2D, id);
     }
+
+    public void unbind(){glBindTexture(GL_TEXTURE_2D, 0);}
 }

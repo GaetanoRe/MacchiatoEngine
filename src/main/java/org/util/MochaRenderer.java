@@ -1,38 +1,21 @@
 package org.util;
 
+import static org.lwjgl.opengl.GL11.*;
+
 public class MochaRenderer {
     private Texture text;
     private MochaTextureHandler mochaTextureHandler;
     private float[] size;
     private float[] position;
 
-    public MochaRenderer(Texture text, float [] size, float [] position){
+    public MochaRenderer(Texture text, float [] size, float [] position, MochaTextureHandler mochaTextureHandler){
         this.text = text;
         this.size = size;
         this.position = position;
-        float [] verticies = new float[] {
-                -0.05f, 0.05f, 0, // TOP LEFT
-                0.05f, 0.05f, 0, // TOP RIGHT
-                0.05f, -0.05f, 0, // BOTTOM RIGHT
-                -0.05f, -0.05f, 0, // BOTTOM LEFT
-        };
-        float [] textureCoords = new float []{
-                0, 0,  // top left
-                1, 0,  // top right
-                1, 1,  // bottom right
-                0, 1,  // bottom left
 
-        };
-
-        int [] indicies = new int []{
-                0,1,2,
-                2,3,0
-        };
-
-        mochaTextureHandler = new MochaTextureHandler(verticies, textureCoords, indicies);
+        this.mochaTextureHandler = mochaTextureHandler;
 
     }
-
 
     public Texture getTexture(){
         return text;
@@ -56,7 +39,21 @@ public class MochaRenderer {
     }
 
     public void setPosition(float [] position){
-        this.position = position;
+        this.position = new float[] {position[0] * 0.0001f, position[1] * 0.0001f};
+    }
+
+    public void renderText(){
+        text.bind();
+
+        // Apply transformations (translation and scaling) based on position and size
+        glPushMatrix();
+        glTranslatef(position[0], position[1], 0);
+        glScalef(size[0], size[1], 1);
+        mochaTextureHandler.render();
+
+        glPopMatrix();
+
+        text.unbind();
     }
 
 }

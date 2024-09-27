@@ -1,4 +1,4 @@
-package org.util.debug.basic;
+package com.util.debug.basic;
 import javax.swing.*;
 
 /**

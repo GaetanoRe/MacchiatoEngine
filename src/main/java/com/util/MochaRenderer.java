@@ -1,4 +1,4 @@
-package org.util;
+package com.util;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -7,11 +7,13 @@ public class MochaRenderer {
     private MochaTextureHandler mochaTextureHandler;
     private float[] size;
     private float[] position;
+    private int zIndex;
 
     public MochaRenderer(Texture text, float [] size, float [] position, MochaTextureHandler mochaTextureHandler){
         this.text = text;
         this.size = size;
         this.position = position;
+        this.zIndex = text.getzIndex();
 
         this.mochaTextureHandler = mochaTextureHandler;
 
@@ -42,8 +44,17 @@ public class MochaRenderer {
         this.position = new float[] {position[0] * 0.0001f, position[1] * 0.0001f};
     }
 
+    public int getzIndex(){
+        return zIndex;
+    }
+
+    public void setzIndex(int z){
+        text.setzIndex(z);
+        zIndex = text.getzIndex();
+    }
+
     public void renderText(){
-        text.bind();
+        //text.bind();
 
         // Apply transformations (translation and scaling) based on position and size
         glPushMatrix();
@@ -53,7 +64,7 @@ public class MochaRenderer {
 
         glPopMatrix();
 
-        text.unbind();
+        //text.unbind();
     }
 
 }

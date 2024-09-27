@@ -1,4 +1,4 @@
-package org.util;
+package com.util;
 import org.lwjgl.BufferUtils;
 
 import java.nio.*;
@@ -56,23 +56,24 @@ public class MochaTextureHandler {
         glEnable(GL_TEXTURE_2D);
 
 
-        glEnableClientState(GL_VERTEX_ARRAY);
-        glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+        glEnableVertexAttribArray(0);
+        glEnableVertexAttribArray(1);
 
         glBindBuffer(GL_ARRAY_BUFFER, vertexId);
-        glVertexPointer(3, GL_FLOAT, 0, 0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
 
         glBindBuffer(GL_ARRAY_BUFFER, textureID);
-        glTexCoordPointer(2, GL_FLOAT, 0, 0);
+        glVertexAttribPointer(1, 2, GL_FLOAT, false, 0, 0);
 
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexID);
         glDrawElements(GL_TRIANGLES, drawCount, GL_UNSIGNED_INT, 0);
 
-        glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-        glDisableClientState(GL_VERTEX_ARRAY);
 
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+        glDisableVertexAttribArray(0);
+        glDisableVertexAttribArray(1);
         glDisable(GL_TEXTURE_2D);
     }
 

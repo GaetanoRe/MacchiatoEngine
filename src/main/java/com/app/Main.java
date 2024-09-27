@@ -1,10 +1,8 @@
-package org.app;
+package com.app;
 
-import org.util.*;
-import org.util.debug.DebugThread;
-import org.util.debug.MochaLogs;
-
-import java.io.IOException;
+import com.util.Window;
+import com.util.*;
+import com.util.debug.MochaLogs;
 
 public class Main {
     public static void main(String[] args) {

@@ -1,6 +1,6 @@
-package org.util;
+package com.util;
 
-import org.util.debug.MochaNotif;
+import com.util.debug.MochaNotif;
 
 import java.io.*;
 import java.util.Scanner;

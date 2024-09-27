@@ -1,6 +1,8 @@
-package org.util;
+package com.util;
+import org.joml.Matrix4f;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
+import com.util.debug.Shader;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -93,14 +95,27 @@ public class Window {
                 2,3,0
         };
         MochaTextureHandler textModel = new MochaTextureHandler(verticies, textureCoords, indicies);
-        Texture texture = new Texture("src/main/resources/textures/GabeTheGhost.png", 0);
-        Texture texture2 = new Texture("src/main/resources/textures/Smiley.png", 0);
+        Texture texture = new Texture("./resources/textures/GabeTheGhost.png", 0);
+        Matrix4f projection = new Matrix4f().ortho2D((float) -this.width /2, (float) this.width /2, (float) -this.height /2,
+                (float) this.height /2);
+        Matrix4f scale = new Matrix4f().scale(1024);
+        Matrix4f translate = new Matrix4f().translate(0, 0, 0);
+        Matrix4f target = new Matrix4f();
 
-        MochaRenderer mr = new MochaRenderer(texture,new float[] {2, 2}, new float [] {0f, 0f}, textModel);
-        MochaRenderer mr2 = new MochaRenderer(texture2,new float[] {2, 2}, new float [] {0, 0f}, textModel);
+        projection.mul(scale, target);
+        target.mul(translate, target);
+        //Texture texture2 = new Texture("src/main/resources/textures/Smiley.png", 1);
+
+        Shader shader = new Shader("shader");
+
+        RenderQueue rq = new RenderQueue();
+
+       // rq.addRenderItem(texture,new float[] {2, 2}, new float [] {0f, 0f}, textModel);
+       // rq.addRenderItem(texture2,new float[] {2, 2}, new float [] {0, 0f}, textModel);
+
         String glErrorMessage = "";
-        float x = mr.getPosition()[0];
-        float y = mr.getPosition()[1];
+        //float x = rq.getPositionAtZ(0)[0];
+        //float y = rq.getPositionAtZ(0)[1];
 
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -112,26 +127,33 @@ public class Window {
             // Input Handling here
 
             // Below is code that was used to move the quad with the previous rendering method.
-            if(inputHandler.isButtonPressed(GLFW_KEY_UP)){
-                y += 1f;
-            }
-            if(inputHandler.isButtonPressed(GLFW_KEY_LEFT)){
-                x -= 1f;
-            }
-            if(inputHandler.isButtonPressed(GLFW_KEY_RIGHT)){
-                x += 1f;
-            }
-            if(inputHandler.isButtonPressed(GLFW_KEY_DOWN)){
-                y -= 1f;
-            }
+//            if(inputHandler.isButtonPressed(GLFW_KEY_UP)){
+//                y += 1f;
+//            }
+//            if(inputHandler.isButtonPressed(GLFW_KEY_LEFT)){
+//                x -= 1f;
+//            }
+//            if(inputHandler.isButtonPressed(GLFW_KEY_RIGHT)){
+//                x += 1f;
+//            }
+//            if(inputHandler.isButtonPressed(GLFW_KEY_DOWN)){
+//                y -= 1f;
+//            }
 
-            mr.setPosition(new float[] {x, y});
+            //rq.setPositionAtZ(0, new float[] {x, y});
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-            // Rendering Handling here
-            mr.renderText();
-
-            mr2.renderText();
+            // handle rendering of objects here.
+            //rq.renderAll();
+            shader.bind();
+//            shader.setUniform("red", 1);
+//            shader.setUniform("green", 0);
+//            shader.setUniform("blue", 0);
+//            shader.setUniform("alpha", 1);
+            shader.setUniform("sampler", 0);
+            shader.setUniform("projection", target);
+            texture.bind(0);
+            textModel.render();
 
             glError = glGetError();
             if(glError != GL_NO_ERROR){

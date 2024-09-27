@@ -57,6 +57,7 @@ dependencies {
     implementation "org.lwjgl:lwjgl-yoga"
     implementation "org.lwjgl:lwjgl-zstd"
     implementation group: 'cz.advel.jbullet', name: 'jbullet', version: '20101010-1'
+    implementation 'org.joml:joml:1.10.4'
     runtimeOnly "org.lwjgl:lwjgl::$lwjglNatives"
     runtimeOnly "org.lwjgl:lwjgl-assimp::$lwjglNatives"
     runtimeOnly "org.lwjgl:lwjgl-bgfx::$lwjglNatives"

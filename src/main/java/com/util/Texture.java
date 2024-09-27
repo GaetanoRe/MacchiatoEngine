@@ -1,7 +1,8 @@
-package org.util;
+package com.util;
 import org.lwjgl.BufferUtils;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL13.*;
 import java.io.*;
 import java.awt.image.*;
 import java.nio.*;
@@ -50,8 +51,20 @@ public class Texture {
 
     }
 
-    public void bind(){
-        glBindTexture(GL_TEXTURE_2D, id);
+    public void setzIndex(int z){
+        zIndex = z;
+    }
+
+    public int getzIndex(){
+        return zIndex;
+    }
+
+    public void bind(int sampler){
+        if(sampler >= 0 && sampler <= 31){
+            glActiveTexture(GL_TEXTURE0 + sampler);
+            glBindTexture(GL_TEXTURE_2D, id);
+        }
+
     }
 
     public void unbind(){glBindTexture(GL_TEXTURE_2D, 0);}

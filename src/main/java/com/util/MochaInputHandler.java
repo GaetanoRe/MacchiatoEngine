@@ -1,5 +1,5 @@
-package org.util;
-import org.util.debug.MochaNotif;
+package com.util;
+import com.util.debug.MochaNotif;
 
 import static org.lwjgl.glfw.GLFW.*;
 import java.util.*;

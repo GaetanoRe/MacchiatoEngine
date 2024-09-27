@@ -1,5 +1,5 @@
-package org.util.debug;
-import org.util.debug.basic.NativeWin;
+package com.util.debug;
+import com.util.debug.basic.NativeWin;
 import javax.swing.*;
 /**
  * <p>Title: MochaLogs</p>

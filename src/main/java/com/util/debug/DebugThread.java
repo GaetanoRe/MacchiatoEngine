@@ -1,4 +1,4 @@
-package org.util.debug;
+package com.util.debug;
 
 /**
  * <p>Debug Thread Class</p>

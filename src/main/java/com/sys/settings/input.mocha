@@ -1,4 +1,4 @@
-# --MochaDungeon Input Settings--
+# --MochaEngine Input Settings--
 # This file is a mocha file that I have created to allow users to customize their inputs.
 # The format of the inputs usually go as follows:
 #   Command_Name (insert GLFW KEY Value here)

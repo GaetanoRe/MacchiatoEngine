@@ -33,9 +33,31 @@ public class MochaInterpreter {
             // InputHandler LinkedList (might change it to a heap but it is a linked list for now)
             if ( splitName[0].equals("input") )
                 setInputSettings(this.file); // edit input settings now
+            if(splitName[0].equals("window"))
+                setWindowSettings(this.file);
         }
         else {
             throw new IOException("This is not a mocha file");
+        }
+    }
+
+    private void setWindowSettings(File input) throws FileNotFoundException{
+        MochaNotif errNotif = new MochaNotif();
+        String message;
+        String title;
+
+        String[] splitUp;
+        scnr = new Scanner(input);
+        String line = scnr.nextLine();
+
+        while (scnr.hasNextLine()){
+            if(line.charAt(0) == '#'){
+                line = scnr.nextLine();
+            }
+            else{
+                splitUp = line.split(" ");
+
+            }
         }
     }
 

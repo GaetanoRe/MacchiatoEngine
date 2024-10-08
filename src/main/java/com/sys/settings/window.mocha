@@ -1,0 +1,5 @@
+#   --MochaEngine Window Settings--
+#   These settings allow for Mocha to adjust the window as needed
+
+WIN_LENGTH 1280
+WIN_WIDTH 720

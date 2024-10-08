@@ -66,7 +66,7 @@ public class Main {
 
         RenderQueue rq = new RenderQueue();
 
-        camera.setPosition(new Vector3f(100, 1, 1));
+        camera.setPosition(new Vector3f(0, 0, 0));
 
         // rq.addRenderItem(texture,new float[] {2, 2}, new float [] {0f, 0f}, textModel);
         // rq.addRenderItem(texture2,new float[] {2, 2}, new float [] {0, 0f}, textModel);

@@ -19,3 +19,9 @@ I have no doubt there are people out there that can make a better engine than I 
 built and I do not know everything it takes to make an engine. As I learn, the engine will improve and I would also
 like for this engine's codebase to be utilized for learning purposes as well.
 
+## Road Map
+
+1) Texture Rendering
+2) Application of Textures on the Physics Engine (Moving the textures and attaching them to physics objects)
+3) Displaying a Demo
+

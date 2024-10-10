@@ -64,8 +64,6 @@ public class Main {
 
         Shader shader = new Shader("shader");
 
-        RenderQueue rq = new RenderQueue();
-
         camera.setPosition(new Vector3f(0, 0, 0));
 
         // rq.addRenderItem(texture,new float[] {2, 2}, new float [] {0f, 0f}, textModel);

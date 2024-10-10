@@ -3,17 +3,14 @@ package com.util;
 
 import org.joml.*;
 
-import com.util.Window;
-import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
 import java.util.LinkedList;
 
-public class Object {
+public class MochaObject {
     private Matrix4f position;
     private String name;
-    private LinkedList<Object> children;
+    private LinkedList<MochaObject> children;
 
-    public Object(){
+    public MochaObject(){
         position = new Matrix4f().ortho2D(0, 0, 0, 0);
     }
 

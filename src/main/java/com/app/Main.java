@@ -13,10 +13,21 @@ import static org.lwjgl.glfw.GLFW.glfwTerminate;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL11.GL_NO_ERROR;
 
+import java.io.IOException;
+
 public class Main {
     public static void main(String[] args) {
         MochaLogs mLogs = new MochaLogs();
         Window win = new Window("MochaEngine", 1280, 720);
+        
+        MochaInterpreter interpreter = new MochaInterpreter("window");
+        try {
+			interpreter.Interpret(win);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
         mLogs.log("Game Running");
         String glErr = gameLoop(win);
         mLogs.log(glErr);

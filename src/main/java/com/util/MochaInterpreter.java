@@ -14,7 +14,7 @@ import java.util.Scanner;
  * </p>
  */
 public class MochaInterpreter {
-	private String filepath = "C:\\Users\\Tahiyat Taifi\\eclipse-workspace\\Club\\Projects\\MochaCremeEngine\\src\\main\\java\\com\\sys\\settings\\";
+	private String filepath = "resources\\config\\";
 	private String filename;
 	private File file;
 	private MochaInputHandler inputHelper;
@@ -33,6 +33,7 @@ public class MochaInterpreter {
 	 * @throws IOException
 	 */
 	public void Interpret(Window win) throws IOException {
+		inputHelper = new MochaInputHandler(win.getWindow());
 		String[] splitName = filename.split("\\.");
 		System.out.println(splitName.length); // --> 2
 		System.out.println(filename); // --> window.mocha
@@ -48,7 +49,7 @@ public class MochaInterpreter {
 				setInputSettings(this.file); // edit input settings now
 			}
 			if (splitName[0].equals("window")) {
-				System.out.println("printing input");
+				System.out.println("printing window input");
 				setWindowSettings(this.file, win);
 
 			}
@@ -169,6 +170,10 @@ public class MochaInterpreter {
 				line = scnr.nextLine();
 			}
 		}
+	}
+
+	public MochaInputHandler getInputSettings(){
+		return inputHelper;
 	}
 
 	//used for testing purposes

@@ -8,7 +8,7 @@
 # beginning of the line is a comment and will be ignored by the InputHandler.
 #
 #Example commands
-Move_Up 87
-Move_Down 83
+Marco 87
+Pollo 83
 Move_Left 65
 Move_Right 68

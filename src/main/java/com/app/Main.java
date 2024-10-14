@@ -21,8 +21,12 @@ public class Main {
         Window win = new Window("MochaEngine", 1280, 720);
         
         MochaInterpreter interpreter = new MochaInterpreter("window");
+        //MochaInterpreter inputInt = new MochaInterpreter("input");
         try {
 			interpreter.Interpret(win);
+            //inputInt.Interpret(win);
+
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -40,7 +44,7 @@ public class Main {
     public static String gameLoop(Window win){
         win.showWindow();
         int glError = 0;
-        MochaInputHandler inputHandler = new MochaInputHandler(win.getWindow());
+        //MochaInputHandler inputHandler = iH;
         Camera2D camera = new Camera2D(win.getWidth(), win.getHeight());
         float [] verticies = new float[] {
                 -1f, 1f, 0, // TOP LEFT
@@ -110,6 +114,7 @@ public class Main {
 
             //rq.setPositionAtZ(0, new float[] {x, y});
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 
             // handle rendering of objects here.
             //rq.renderAll();

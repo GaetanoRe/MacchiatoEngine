@@ -32,6 +32,8 @@ public class Window {
     // The name displayed on the Window
     private String winName;
 
+//    private MochaInputHandler inputManager;
+
     /**
      * Default constructor - Instantiates the window. Doesn't show the window yet.
      * @param winName
@@ -50,6 +52,7 @@ public class Window {
         if(window == 0){
             throw new IllegalStateException("Window failed to be created though GLFW was initialized.");
         }
+       // this.inputManager = new MochaInputHandler(this.window);
 
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwMakeContextCurrent(window);
@@ -99,6 +102,14 @@ public class Window {
         this.height = height;
         glfwSetWindowSize(this.window, this.width, this.height);
     }
+
+//    public void setInputManager(MochaInputHandler mi){
+//        this.inputManager = mi;
+//    }
+//
+//    public MochaInputHandler getInputManager(){
+//        return this.inputManager;
+//    }
 
     public void showWindow(){
         glfwShowWindow(window);

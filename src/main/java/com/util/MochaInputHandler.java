@@ -1,4 +1,5 @@
 package com.util;
+import com.app.Main;
 import com.util.debug.MochaNotif;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -79,5 +80,26 @@ public class MochaInputHandler {
             errNotif.show(message, title);
         }
     }
+    
+    public static void main(String args[]) {
+    	Window win = new Window("MochaInterpreter", 1280, 720);
+    	MochaInputHandler input = new MochaInputHandler(win.getWindow());
+    	
+    	Main.gameLoop(win);
+    }
 
+  public static  void key_callback(long window, int key, int scancode, int action, int mods)
+    {
+        if (key == GLFW_KEY_E && action == GLFW_PRESS)
+            System.out.println("E was pressed");
+        if (key == GLFW_KEY_D && action == GLFW_PRESS)
+            System.out.println("D was pressed");
+
+        if (key == GLFW_KEY_W && action == GLFW_PRESS)
+            System.out.println("W was pressed");
+        if (key == GLFW_KEY_A && action == GLFW_PRESS)
+            System.out.println("A was pressed");
+        if (key == GLFW_KEY_S && action == GLFW_PRESS)
+            System.out.println("S was pressed");}
+  		
 }

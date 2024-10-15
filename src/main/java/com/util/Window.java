@@ -60,6 +60,7 @@ public class Window {
         GL.createCapabilities();
 
         GLFWVidMode vidMode = glfwGetVideoMode(window);
+        glfwSetKeyCallback(window, MochaInputHandler::key_callback);
 
     }
 

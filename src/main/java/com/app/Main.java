@@ -1,6 +1,5 @@
 package com.app;
 
-import com.util.Window;
 import com.util.*;
 import com.util.debug.Camera2D;
 import com.util.debug.MochaLogs;
@@ -12,6 +11,7 @@ import static org.lwjgl.glfw.GLFW.glfwPollEvents;
 import static org.lwjgl.glfw.GLFW.glfwTerminate;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL11.GL_NO_ERROR;
+import static org.lwjgl.glfw.GLFW.*;
 
 import java.io.IOException;
 
@@ -44,7 +44,8 @@ public class Main {
     public static String gameLoop(Window win){
         win.showWindow();
         int glError = 0;
-        //MochaInputHandler inputHandler = iH;
+        MochaInputHandler inputHandler = new MochaInputHandler(win.getWindow());;
+      
         Camera2D camera = new Camera2D(win.getWidth(), win.getHeight());
         float [] verticies = new float[] {
                 -1f, 1f, 0, // TOP LEFT
@@ -85,8 +86,8 @@ public class Main {
         // rq.addRenderItem(texture2,new float[] {2, 2}, new float [] {0, 0f}, textModel);
 
         String glErrorMessage = "";
-        //float x = rq.getPositionAtZ(0)[0];
-        //float y = rq.getPositionAtZ(0)[1];
+        float x = 0;
+        float y = 0;
 
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -99,20 +100,20 @@ public class Main {
             // Input Handling here
 
             // Below is code that was used to move the quad with the previous rendering method.
-//            if(inputHandler.isButtonPressed(GLFW_KEY_UP)){
-//                y += 1f;
-//            }
-//            if(inputHandler.isButtonPressed(GLFW_KEY_LEFT)){
-//                x -= 1f;
-//            }
-//            if(inputHandler.isButtonPressed(GLFW_KEY_RIGHT)){
-//                x += 1f;
-//            }
-//            if(inputHandler.isButtonPressed(GLFW_KEY_DOWN)){
-//                y -= 1f;
-//            }
+            if(inputHandler.isButtonPressed(GLFW_KEY_UP)){
+                y += 1f;
+            }
+            if(inputHandler.isButtonPressed(GLFW_KEY_LEFT)){
+                x -= 1f;
+            }
+            if(inputHandler.isButtonPressed(GLFW_KEY_RIGHT)){
+                x += 1f;
+            }
+            if(inputHandler.isButtonPressed(GLFW_KEY_DOWN)){
+                y -= 1f;
+            }
 
-            //rq.setPositionAtZ(0, new float[] {x, y});
+            camera.setPosition(new Vector3f(x,y,0));
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
